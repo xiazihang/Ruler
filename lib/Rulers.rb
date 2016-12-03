@@ -1,6 +1,8 @@
 require "Rulers/version"
 require "Rulers/array"
 require "Rulers/routing"
+require "Rulers/util"
+require "Rulers/dependencies"
 
 module Rulers
   class Application
@@ -16,7 +18,7 @@ module Rulers
         return [200, {"Content-Type" => "text/html"}, [HomeController.new(env).send(:index)]]
       end
 
-      if instance.respond_to? action.to_sym
+      if !instance.respond_to? action.to_sym
         return [404, {"Content-Type" => "text/html"}, []]
       end
       text = instance.send(action)
