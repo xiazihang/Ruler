@@ -1,4 +1,5 @@
 require "Rulers/version"
+require "Rulers/array"
 
 module Rulers
   class Application
