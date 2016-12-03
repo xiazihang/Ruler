@@ -5,13 +5,20 @@ require "Rulers/routing"
 module Rulers
   class Application
     def call(env)
-      #get controller & action
+      klass, action = get_controller_and_action(env)
+      instance = klass.new(env)
+
       if env["PATH_INFO"] == "/favicon.ico"
         return [404, {"Content-Type" => "text/html"}, []]
       end
-      klass, action = get_controller_and_action(env)
-      instance = klass.new(env)
-      return [404, {"Content-Type" => "text/html"}, []] unless instance.respond_to?(action.to_sym)
+
+      if env["PATH_INFO"] == "/"
+        return [200, {"Content-Type" => "text/html"}, [HomeController.new(env).send(:index)]]
+      end
+
+      if instance.respond_to? action.to_sym
+        return [404, {"Content-Type" => "text/html"}, []]
+      end
       text = instance.send(action)
       [200, {'Content-Type' => 'text/html'},
         [text]]
