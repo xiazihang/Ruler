@@ -4,6 +4,7 @@ require "Rulers/routing"
 require "Rulers/util"
 require "Rulers/dependencies"
 require "Rulers/controller"
+require "Rulers/file_model"
 
 module Rulers
   class Application
