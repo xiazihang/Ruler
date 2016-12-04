@@ -16,7 +16,11 @@ module Rulers
 
       eruby = Erubis::Eruby.new(template)
 
-      eruby.result locale.merge(:env => env)
+      instance_variables.each do |var|
+        locale[var.to_s.gsub(/@/, "").to_sym] = instance_variable_get var
+      end
+
+      eruby.result locale
     end
 
     def controller_name
