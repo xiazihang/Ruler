@@ -3,6 +3,7 @@ require "Rulers/array"
 require "Rulers/routing"
 require "Rulers/util"
 require "Rulers/dependencies"
+require "Rulers/controller"
 
 module Rulers
   class Application
@@ -24,16 +25,6 @@ module Rulers
       text = instance.send(action)
       [200, {'Content-Type' => 'text/html'},
         [text]]
-    end
-  end
-
-  class Controller
-    def initialize(env)
-      @env = env
-    end
-
-    def env
-      @env
     end
   end
 end
