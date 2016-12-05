@@ -23,10 +23,13 @@ module Rulers
       eruby.result locale
     end
 
+    private
+
     def controller_name
       klass = self.class.to_s
       klass.gsub!(/Controller$/, '')
       Rulers::Util.to_underscore(klass)
     end
+
   end
 end
