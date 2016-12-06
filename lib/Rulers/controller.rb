@@ -15,6 +15,10 @@ module Rulers
       @request ||= Rack::Request.new(@env)
     end
 
+    def params
+      request.params
+    end
+
     def render(view, locale = {})
       view_name = File.join('app', 'views', controller_name, view.to_s + '.html.erb')
       template = File.read view_name
