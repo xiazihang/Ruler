@@ -23,6 +23,7 @@ module Rulers
       if !instance.respond_to? action.to_sym
         return [404, {"Content-Type" => "text/html"}, []]
       end
+
       text = instance.send(action)
       [200, {'Content-Type' => 'text/html'},
         [text]]
